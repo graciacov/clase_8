@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="50 top canciones escuchadas en Spotify">
+    <meta name="author" content="Gracia Covarrubias">
+
+    <title>CLASE 8</title>
+    <link rel="icon" type="image/png" href="monogram.png">
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.min.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">SPOTIFY TOP 50 STREAMS</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">ARTISTAS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#download">TOP 50</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">SOBRE SPOTIFY</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="masthead">
+      <div class="intro-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h1 class="brand-heading">SPOTIFY'S TOP 50</h1>
+              <p class="intro-text" style="font-family:Lato" style="color:#42DCA3">LAS 50 CANCIONES MAS ESCUCHADAS EL 2016
+                <br>https://www.cooldatasets.com/</p>
+              <a href="#about" class="btn btn-circle js-scroll-trigger">
+                <i class="fa fa-angle-double-down animated"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- P5 -->
+<section id="about" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto" style="font-family:Lato" style="color:#42DCA3" >
+            <h2 >TOP 5 CANCIONES</h2>
+            <p style="font-size:16px">Escucha las 5 canciones más transmitidas el 2006 en Spotify según <a href="https://www.cooldatasets.com">Cool Data Sets</a>:</p>
+
+                 <div class="input-group mb-3">
+                <select class="custom-select" id="persona">
+                <option selected>Escoge una Canción</option>
+                <option value="1">One Dance | Drake</option>
+                <option value="2">Lean On | Major Lazer</option>
+                <option value="3">Sorry | Justin Bieber</option>
+                <option value="4">Love Yourself | Justin Bieber</option>
+                <option value="5">Thinking Out Loud | Ed Sheeran </option>
+                </select>
+                <div class="input-group-append" >
+                  <button id="submit">PLAY</button>
+                </div>
+                <div class="input-group-append" >
+                  <button id="stop">PAUSE</button>
+                </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+
+              <script>
+                function setup() {
+                var button = select('#submit');
+                button.mousePressed(play);
+                var boton = select('#stop');
+                input = select('#persona');
+
+              }
+
+                function play() {
+                  if (input.value() == 1){
+                  var audio = new Audio('onedance.mp3'); 
+                  } else if (input.value() == 2){
+                  var audio = new Audio('leanon.mp3'); 
+                  } else if (input.value() == 3){
+                   var audio = new Audio('sorry.mp3'); 
+                  }else if (input.value() == 4){
+                   var audio = new Audio('love.mp3'); 
+                  }else if (input.value() == 5){
+                   var audio = new Audio('loud.mp3'); 
+                  }
+                  audio.play();
+
+                }
+
+                
+              </script>
+
+      </div>
+          </div>
+        </div>
+     </div>
+
+
+      </div>
+</section>
+
+    <!-- D3-->
+<section id="download" class="download-section content-section text-center">
+      <div class="container">
+        <div class="row">
+            <div class="col-12" style="font-family:Lato" style="color:#42DCA3">
+               <h3>Top 50 Streams</h3>
+               <h5 >CANCIONES MAS ESCUCHADAS DE SPOTIFY </h5>
+               
+               <div id="here" class="my-4"></div>
+            </div>
+            
+         </div>
+      </div>
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <script>
+         var w = 980, f = 0.4, h = 20;
+         
+         d3.csv("https://raw.githubusercontent.com/graciacov/clase_8/gh-pages/data.csv").then(function(data) {
+         
+           console.log(data);
+         
+           var viz = d3.select("#here") //seleccionar lugar
+             .append("svg")
+             .attr("width", w)
+             .attr("height", h * data.length)
+             
+         
+           var bar = viz.selectAll("g") // chanto un g (group)
+             .data(data)
+             .enter()
+             .append("g")
+             .attr("transform", function(d, i) { return "translate(0," + i * h + ")"; });
+             
+             bar.append("rect") // bar es un grupo seleccionado
+               .attr("width", function(d) { return d.streams * f; })
+               .attr("height", h - 5)
+               .attr("fill","white");
+
+             
+             bar.append("text")
+               .attr("x", function(d) { return (d.streams * f)+5; })
+               .attr("y", h / 2)
+               .text(function(d) { return d.title; })
+               .attr("fill","white")
+               .attr("font-size","12")
+               .attr("font-family","Lato")
+               .attr("font-weight","light")
+
+
+             bar.append("text")
+               .attr("x", function(d) { return (d.streams * f)-10; })
+               .attr("y", h / 2)
+               .text(function(d) { return Math.round(d.streams); })
+               .attr("fill","#42DCA3")
+               .attr("font-size","12")
+               .attr("font-family","Lato")
+               .attr("text-anchor","end")
+               .attr("font-weight","bold")
+
+         })
+      </script>
+        <div style="font-family: Lato" >
+        <p style="font-size: 18px" style="color:#42DCA3"> Números corresponden a cantidad de transmisiones en Spotify.</p>  
+        <p style="font-size: 12px" style="color:#42DCA3"> * Este gráfico se construye mediante consulta a <a href="https://raw.githubusercontent.com/graciacov/clase_8/gh-pages/data.csv" target="_blank">una base de datos</a>, gestionada por <a href="https://github.com/d3/d3-fetch" target="_blank">D3.js</a>
+        </p>
+      
+</section>
+
+
+
+
+    <!-- IMAGEN + TEXTO -->
+    <section id="contact" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Sobre Spotify</h2>
+            <img src="spoti.png" style="height:300px;">
+            <div style="font-family: Lato" >
+            <p>Con Spotify, es fácil encontrar la mejor música para cada momento desde el celular, computadora, tablet y mucho más. </p>
+            <p>Hay millones de canciones en Spotify. Así que cuando estés haciendo ejercicio, de fiesta o descansando, tendrás siempre la mejor música al alcance de tu mano. Elige lo que quieras escuchar o deja que Spotify te sorprenda. </p>
+            <p>También puedes buscar en las colecciones de música de amigos, artistas y famosos o crear una estación de radio y relajarte.</p>
+            <p>Ponle música a tu vida con Spotify. Suscríbete o escucha gratis.</p>
+            <p style="font-size: 10px" style="color:#42DCA3"> <a href="https://www.spotify.com/cl/about-us/contact/" target="_blank"> * https://www.spotify.com/cl/about-us/contact/ </a></p>
+            </div>
+              <li class="list-inline-item">
+                <a href="https://www.spotify.com/cl/" target="_blank" class="btn btn-default btn-lg">
+                  
+                  <span class="network-name">Spotify</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+     </div>
+    </section>
+
+   
+    <!-- Footer -->
+    <footer>
+      <div class="container text-center" style="font-family: Lato" style="font-size: 10px">
+        <img src="img/biebs.gif">
+        <p style="color:#42DCA3">GRACIA COVARRUBIAS PRIETO</p>
+        <p> Diseño & Nuevos Medios 2018 </p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  
+    <!-- Custom scripts for this template -->
+    <script src="js/grayscale.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  </body>
+
+</html>
